@@ -262,9 +262,12 @@ public class RouteServiceImpl extends ServiceImpl<RouteMapper, Route> implements
         //初始化配置信息做批量添加
         List<RouteScenicSpotConfig> routeScenicSpotConfigs = new ArrayList<>();
         for (int i = 0; i < scenicSpotId.length; i++) {
+            String  scenicSpotIdStr = scenicSpotId[i];
+            if(null==scenicSpotIdStr||("null").equals(scenicSpotIdStr)||("NULL").equals(scenicSpotIdStr))
+                continue;
             RouteScenicSpotConfig config = new RouteScenicSpotConfig();
             config.setRouteId(route.getId());
-            config.setScenicSpotId(scenicSpotId[i]);
+            config.setScenicSpotId(scenicSpotIdStr);
             config.setOrderNum(i + 1);
             routeScenicSpotConfigs.add(config);
         }
