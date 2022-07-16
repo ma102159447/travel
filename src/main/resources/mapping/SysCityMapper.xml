@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.travel.mapper.SysCityMapper">
+    <sql id="selectSql">
+        select code, name, parentCode, flag
+        from sys_city
+    </sql>
+    <!--
+         List<SysCity> getParent();
+        List<SysCity> getByParent(String code);
+     -->
+    <select id="getParent" resultType="com.travel.travel.entity.SysCity">
+        <include refid="selectSql"></include> where parentCode is null and flag = 1
+    </select>
+    <select id="getByParentCode" parameterType="string" resultType="com.travel.travel.entity.SysCity">
+        <include refid="selectSql"></include>
+        where 1=1 and parentCode = #{code} and flag = 1
+    </select>
+</mapper>

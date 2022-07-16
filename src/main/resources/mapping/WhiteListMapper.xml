@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.travel.mapper.WhiteListMapper">
+
+    <delete id="removeById">
+        delete from white_list where id = #{id}
+    </delete>
+    <delete id="removeByUserId">
+        delete from white_list where insert_user_id = #{userId} and whitelist_user_id = #{whiteListUserId}
+    </delete>
+    <select id="getByUserId" resultType="com.travel.travel.entity.ext.WhiteListExt">
+        select wl.id,wl.insert_user_id,u.* from white_list wl inner join userinfo u on u.id = wl.whitelist_user_id where wl.insert_user_id=#{userId} and u.flag = 1
+    </select>
+</mapper>

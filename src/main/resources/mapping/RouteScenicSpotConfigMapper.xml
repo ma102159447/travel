@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.travel.mapper.RouteScenicSpotConfigMapper">
+
+    <select id="searchRouteScenicSpotConfigByRouteId"
+            resultType="com.travel.travel.entity.ext.RouteScenicSpotConfigExt">
+        select rssc.id, rssc.route_id, rssc.`order_num`, ss.*
+        from route_scenic_spot_config rssc
+                 inner join scenic_spot ss on rssc.scenic_spot_id = ss.id
+        where rssc.route_id = #{routeId}
+        order by rssc.`order_num`
+    </select>
+</mapper>

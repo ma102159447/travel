@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.travel.mapper.BlackListMapper">
+
+    <delete id="removeByUserId">
+        delete
+        from black_list
+        where insert_user_id = #{userId}
+          and blacklist_user_id = #{blackListUserId}
+    </delete>
+    <delete id="removeById">
+        delete
+        from black_list
+        where id = #{id}
+    </delete>
+    <select id="getByUserId" resultType="com.travel.travel.entity.ext.BlackListExt">
+        select b.id, b.insert_user_id, u.*
+        from black_list b
+                 inner join userinfo u on u.id = b.blacklist_user_id
+        where b.insert_user_id = #{userId}
+          and u.flag = 1
+    </select>
+
+</mapper>
