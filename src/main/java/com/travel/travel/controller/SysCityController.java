@@ -56,4 +56,17 @@ public class SysCityController {
             return ReturnUtil.createReturnUtil(500, "服务器繁忙请稍后再试", null);
         }
     }
+    /**
+     * 获得省市区的树形结构
+     *
+     * @return
+     */
+    @RequestMapping("getTree")
+    public Object getTree() {
+        try {
+            return ReturnUtil.createReturnUtil(200, "", sysCityService.getTree());
+        } catch (Exception e) {
+            return ReturnUtil.createReturnUtil(500, "服务器繁忙请稍后再试", null);
+        }
+    }
 }

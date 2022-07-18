@@ -29,5 +29,6 @@ public interface SysCityService extends IService<SysCity> {
 
     List<SysCity> getTreeOfCity();
 
+    List<SysCity> getTree();
 
 }
