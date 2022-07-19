@@ -27,7 +27,10 @@ public class StationRoute implements Serializable {
      * 主键
      */
     private String id;
-
+    /**
+     * 用户id
+     */
+    private String uid;
     /**
      * 标题
      */

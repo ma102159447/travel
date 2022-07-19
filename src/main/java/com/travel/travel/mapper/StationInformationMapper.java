@@ -12,5 +12,5 @@ import com.travel.travel.entity.StationInformation;
  * @since 2022-07-19
  */
 public interface StationInformationMapper extends BaseMapper<StationInformation> {
-
+    int deleteById(String id);
 }

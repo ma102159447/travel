@@ -9,6 +9,8 @@ import com.travel.travel.service.StationRouteService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,7 +50,12 @@ public class StationRouteServiceImpl extends ServiceImpl<StationRouteMapper, Sta
      * @return
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public boolean insertStationRoute(StationRoute stationRoute) {
+        if (this.save(stationRoute)){
+            return  stationInformationService.saveBatch(stationRoute.getStationInformationList());
+
+        }
         return false;
     }
 
@@ -59,7 +66,15 @@ public class StationRouteServiceImpl extends ServiceImpl<StationRouteMapper, Sta
      * @return
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public boolean updateStationRouteById(StationRoute stationRoute) {
+        if(stationRoute==null && stationRoute.getId()==null && ("").equals(stationRoute.getId())&&("null").equalsIgnoreCase(stationRoute.getId())){
+            return false;
+        }
+        if(this.updateById(stationRoute)){
+            return stationInformationService.updateBatchById(stationRoute.getStationInformationList());
+        }
+
         return false;
     }
 }
