@@ -1,6 +1,7 @@
 package com.travel.travel.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.travel.travel.entity.StationInformation;
 import com.travel.travel.entity.StationRoute;
@@ -33,11 +34,12 @@ public class StationRouteController {
 
     /**
      * 根据参数获得上车线路列表
-     * @param stationRoute
+     * @param data
      * @return
      */
     @PostMapping("getList")
-    public R<List<StationRoute>> getList(StationRoute stationRoute){
+    public R<List<StationRoute>> getList(String data){
+        StationRoute stationRoute = JSON.parseObject(data, StationRoute.class);
         try {
             QueryWrapper<StationRoute> queryWrapper = new QueryWrapper<>(stationRoute);
             return R.success(stationRouteService.list(queryWrapper));
@@ -62,12 +64,16 @@ public class StationRouteController {
 
     /**
      * 添加上车线路信息以及上车线路站点
-     * @param stationRoute
+     * @param data
      * @return
      */
     @PostMapping("insertStationRoute")
-    public R<String> insertStationRoute(StationRoute stationRoute){
+    public R<String> insertStationRoute(String data){
+
         try {
+            StationRoute stationRoute = JSON.parseObject(data ,StationRoute.class);
+            List<StationInformation> stationInformationList = JSON.parseObject(JSON.parseObject(data).getJSONArray("stationInformationList").toJSONString(),List.class);
+            stationRoute.setStationInformationList(stationInformationList);
             return stationRouteService.insertStationRoute(stationRoute)?R.success(null):R.error("添加失败");
         } catch (Exception e) {
             return R.error("添加异常");
@@ -76,12 +82,15 @@ public class StationRouteController {
 
     /**
      * 更新线路信息以及景点信息
-     * @param stationRoute
+     * @param data
      * @return
      */
     @PostMapping("updateStationRouteById")
-    public R<String> updateStationRouteById(StationRoute stationRoute){
+    public R<String> updateStationRouteById(String data){
         try {
+            StationRoute stationRoute = JSON.parseObject(data ,StationRoute.class);
+            List<StationInformation> stationInformationList = JSON.parseObject(JSON.parseObject(data).getJSONArray("stationInformationList").toJSONString(),List.class);
+            stationRoute.setStationInformationList(stationInformationList);
             return stationRouteService.updateStationRouteById(stationRoute)?R.success("success"):R.error("修改失败");
         } catch (Exception e) {
             return R.error("系统异常");
