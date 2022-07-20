@@ -35,7 +35,14 @@ public class StationRoute implements Serializable {
      * 标题
      */
     private String title;
-
+    /**
+     * 城市编码
+     */
+    private String cityCode;
+    /**
+     * 城市名称
+     */
+    private String cityName;
     /**
      * 概述
      */

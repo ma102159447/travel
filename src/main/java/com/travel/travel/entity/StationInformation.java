@@ -28,21 +28,6 @@ public class StationInformation implements Serializable {
      */
     private String srId;
     /**
-     * 省
-     */
-    private String province;
-
-    /**
-     * 市
-     */
-    private String city;
-
-    /**
-     * 区县
-     */
-    private String county;
-
-    /**
      * 到站时间
      */
     private String arrivalTime;
