@@ -10,6 +10,7 @@ import com.travel.travel.service.StationRouteService;
 import com.travel.travel.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -34,12 +35,11 @@ public class StationRouteController {
 
     /**
      * 根据参数获得上车线路列表
-     * @param data
+     * @param stationRoute
      * @return
      */
     @PostMapping("getList")
-    public R<List<StationRoute>> getList(String data){
-        StationRoute stationRoute = JSON.parseObject(data, StationRoute.class);
+    public R<List<StationRoute>> getList(StationRoute stationRoute){
         try {
             QueryWrapper<StationRoute> queryWrapper = new QueryWrapper<>(stationRoute);
             return R.success(stationRouteService.list(queryWrapper));
@@ -64,16 +64,12 @@ public class StationRouteController {
 
     /**
      * 添加上车线路信息以及上车线路站点
-     * @param data
+     * @param stationRoute
      * @return
      */
     @PostMapping("insertStationRoute")
-    public R<String> insertStationRoute(String data){
-
+    public R<String> insertStationRoute(@RequestBody StationRoute stationRoute){
         try {
-            StationRoute stationRoute = JSON.parseObject(data ,StationRoute.class);
-            List<StationInformation> stationInformationList = JSON.parseObject(JSON.parseObject(data).getJSONArray("stationInformationList").toJSONString(),List.class);
-            stationRoute.setStationInformationList(stationInformationList);
             return stationRouteService.insertStationRoute(stationRoute)?R.success(null):R.error("添加失败");
         } catch (Exception e) {
             return R.error("添加异常");
@@ -82,15 +78,12 @@ public class StationRouteController {
 
     /**
      * 更新线路信息以及景点信息
-     * @param data
+     * @param stationRoute
      * @return
      */
     @PostMapping("updateStationRouteById")
-    public R<String> updateStationRouteById(String data){
+    public R<String> updateStationRouteById(@RequestBody StationRoute stationRoute){
         try {
-            StationRoute stationRoute = JSON.parseObject(data ,StationRoute.class);
-            List<StationInformation> stationInformationList = JSON.parseObject(JSON.parseObject(data).getJSONArray("stationInformationList").toJSONString(),List.class);
-            stationRoute.setStationInformationList(stationInformationList);
             return stationRouteService.updateStationRouteById(stationRoute)?R.success("success"):R.error("修改失败");
         } catch (Exception e) {
             return R.error("系统异常");

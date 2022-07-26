@@ -1,9 +1,12 @@
 package com.travel.travel.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -51,9 +54,10 @@ public class StationRoute implements Serializable {
     /**
      * 逻辑删除
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer flag;
 
     @TableField(exist = false)
-    private List<StationInformation>  stationInformationList;
+    private List<StationInformation>  stationInformationList = new ArrayList<>();
 
 }
