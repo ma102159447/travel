@@ -54,7 +54,6 @@ public class StationRoute implements Serializable {
     /**
      * 逻辑删除
      */
-    @TableField(fill = FieldFill.INSERT)
     private Integer flag;
 
     @TableField(exist = false)
