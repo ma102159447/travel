@@ -52,6 +52,7 @@ public class StationRouteServiceImpl extends ServiceImpl<StationRouteMapper, Sta
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean insertStationRoute(StationRoute stationRoute) {
+        stationRoute.setFlag(1);
         if (this.save(stationRoute)){
             for (StationInformation stationInformation : stationRoute.getStationInformationList()) {
                 stationInformation.setSrId(stationRoute.getId());
