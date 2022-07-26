@@ -127,6 +127,10 @@ public class RouteController {
     public Object searchRouteByParams(Route route) {
         return ReturnUtil.createReturnUtil(200, "查询成功", routeService.searchRouteByParams(route));
     }
+    @RequestMapping("searchRouteByParamsPaging")
+    public Object searchRouteByParamsPaging(int currentPage,int pageNum,Route route) {
+        return ReturnUtil.createReturnUtil(200, "查询成功", routeService.searchRouteByParamsPaging(currentPage,pageNum,route));
+    }
 
     /**
      * 根据线路id查询线路详细信息以及线路包含的景点详细信息
@@ -139,6 +143,7 @@ public class RouteController {
         return ReturnUtil.createReturnUtil(200, "查询成功", routeService.searchRouteAndScenicSpotByRouteId(routeId));
 
     }
+
 
     /**
      * 根据参数列表查询线路数量

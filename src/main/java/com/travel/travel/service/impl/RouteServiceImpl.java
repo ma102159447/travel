@@ -1,6 +1,7 @@
 package com.travel.travel.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.travel.travel.entity.Route;
 import com.travel.travel.entity.RouteScenicSpotConfig;
 import com.travel.travel.entity.ScenicSpot;
@@ -46,6 +47,19 @@ public class RouteServiceImpl extends ServiceImpl<RouteMapper, Route> implements
     public List<Route> searchRouteByParams(Route route) {
         QueryWrapper<Route> routeQueryWrapper = new QueryWrapper<>(route);
         return this.list(routeQueryWrapper);
+    }
+
+    /**
+     * 查询线路信息并分页
+     * @param currentPage 当前页
+     * @param pageNum 每页显示条数
+     * @param route 实例
+     * @return
+     */
+    @Override
+    public Page<Route> searchRouteByParamsPaging(int currentPage,int pageNum,Route route) {
+        QueryWrapper<Route> routeQueryWrapper = new QueryWrapper<>(route);
+        return this.page(new Page<Route>(currentPage,pageNum),routeQueryWrapper);
     }
 
     /**

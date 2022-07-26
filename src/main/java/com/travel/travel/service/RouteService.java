@@ -1,5 +1,6 @@
 package com.travel.travel.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.travel.travel.entity.Route;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.travel.travel.entity.ScenicSpot;
@@ -23,6 +24,7 @@ public interface RouteService extends IService<Route> {
      * @return Route 集合
      */
     List<Route> searchRouteByParams(Route route);
+    Page<Route> searchRouteByParamsPaging(int currentPage, int pageNum, Route route);
     /**
      * 根据线路id查询线路详细信息以及线路包含的景点详细信息
      * @param routeId 线路id
